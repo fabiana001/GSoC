@@ -85,9 +85,9 @@ Di seguito viene visualizzato il numero di bandi per provincia prima come cifra,
 <img src="./images/7.png" alt="Distribuzione Ammontare bandi" width="600px"/>
 </div>
 
-In entrambi i casi la Regione capolista risulta essere il **Lazio**, sia per numero di bandi che per importo aggiudicato. Infatti, preso singolarmente, il *Lazio *assegna quasi il *40% *del denaro totale dei bandi analizzati. In confronto la *Lombardia *, seconda classificata, non arriva neanche al *15%*, mentre tutte le altre Regioni sono sotto il *10%*. Da notare che da un grafico all'altro il trend è lo stesso, me nel grafico dell'importo le differenze sono decisamente più marcate, segno che quei (relativamente pochi) bandi in più del Lazio sono in realtà particolarmente costosi.
+In entrambi i casi la Regione capolista risulta essere il **Lazio**, sia per numero di bandi che per importo aggiudicato. Infatti, preso singolarmente, il *Lazio* assegna quasi il *40%* del denaro totale dei bandi analizzati. In confronto la *Lombardia* , seconda classificata, non arriva neanche al *15%*, mentre tutte le altre Regioni sono sotto il *10%*. Da notare che da un grafico all'altro il trend è lo stesso, me nel grafico dell'importo le differenze sono decisamente più marcate, segno che quei (relativamente pochi) bandi in più del Lazio sono in realtà particolarmente costosi.
 
-Questa stessa analisi può essere ripetuta su base provinciale. Ma non potendo visualizzare tutte e *110 *le province in un grafico, ci restringiamo a un sottoinsieme di *20* province. Nei due grafici che seguono abbiamo quindi il numero di bandi e l'importo di questi divisi fra delle province di esempio. 
+Questa stessa analisi può essere ripetuta su base provinciale. Ma non potendo visualizzare tutte e *110* le province in un grafico, ci restringiamo a un sottoinsieme di *20* province. Nei due grafici che seguono abbiamo quindi il numero di bandi e l'importo di questi divisi fra delle province di esempio. 
 
 <div style="text-align:center">
 <img src="./images/8.png" alt="Distribuzione Ammontare bandi" width="550px"/>
@@ -99,7 +99,7 @@ Questa stessa analisi può essere ripetuta su base provinciale. Ma non potendo v
 
 La percentuale indicata nei grafici non è presa sul totale dei bandi ma è presa solo su questo specifico sottoinsieme di province.
 
-Con questi grafici abbiamo terminato l'esplorazione di questi dataset. Avendo a disposizione **27 feature **ci sono molte domande a cui si può rispondere se si vuole approfondire qualcosa di specifico. Se si sta compiendo un'indagine su una particolare provincia, potrebbe essere utile una visualizzazione per *Comune*, oppure se ci sono delle discrepanze nel bilancio si possono mostrare le differenze fra le *somme aggiudicate *e quelle *liquidate*. Questa parte intendeva mostrare come, con relativa semplicità, si possano estrarre informazioni generali e interessanti dai nostri dataset.
+Con questi grafici abbiamo terminato l'esplorazione di questi dataset. Avendo a disposizione **27 feature** ci sono molte domande a cui si può rispondere se si vuole approfondire qualcosa di specifico. Se si sta compiendo un'indagine su una particolare provincia, potrebbe essere utile una visualizzazione per *Comune*, oppure se ci sono delle discrepanze nel bilancio si possono mostrare le differenze fra le *somme aggiudicate* e quelle *liquidate*. Questa parte intendeva mostrare come, con relativa semplicità, si possano estrarre informazioni generali e interessanti dai nostri dataset.
 
 Nella prossima sezione adottiamo un approccio diverso, meno generale ma più strumentale rispetto ad un'attività di indagine o sorveglianza. Ci concentriamo su dei bandi in particolare, in cui compaiono frequentemente gli stessi operatori commerciali in competizione fra loro, e utilizziamo un algoritmo di *Machine Learning* per far emergere eventuali bandi sospetti, che può essere un elemento utile ad accertare eventuali irregolarità.
 
@@ -117,12 +117,12 @@ Per capire meglio prendiamo ad esempio il bando con cig *6911006690*. Il bando �
 Una volta svolta questa operazione per tutti i bandi a nostra disposizione, il dataset così generato verrà dato in input ad un algoritmo di **Frequent Pattern Mining** chiamato **[FP-Growth](https://wimleers.com/sites/wimleers.com/files/FP-Growth%20presentation%20handouts%20%E2%80%94%C2%A0Florian%20Verhein.pdf)**. Questo algoritmo è studiato per trovare i pattern frequenti, ovvero nel nostro caso per identificare i bandi che hanno gli stessi competitor. *FP-Growth* funziona nel seguente modo:
 
 - Nel primo passaggio, l'algoritmo conta l'occorrenza di elementi (coppie attributo-valore) nel dataset e li memorizza in una "tabella di intestazione".
-- Nel secondo passaggio, costruisce l'albero *FP-tree *inserendo il pattern in una determinata posizione: gli elementi di ogni pattern devono essere ordinati in ordine decrescente rispetto alla loro frequenza nel dataset, in modo che l'albero possa essere elaborato rapidamente. Gli elementi in ogni pattern che non soddisfano la soglia minima di copertura vengono scartati. Se molti pattern condividono gli oggetti più frequenti, l'albero FP fornisce una versione compressa degli elementi vicino alla radice dell'albero.
+- Nel secondo passaggio, costruisce l'albero *FP-tree* inserendo il pattern in una determinata posizione: gli elementi di ogni pattern devono essere ordinati in ordine decrescente rispetto alla loro frequenza nel dataset, in modo che l'albero possa essere elaborato rapidamente. Gli elementi in ogni pattern che non soddisfano la soglia minima di copertura vengono scartati. Se molti pattern condividono gli oggetti più frequenti, l'albero FP fornisce una versione compressa degli elementi vicino alla radice dell'albero.
 - L'elaborazione ricorsiva di questa versione compressa del dataset principale aumenta direttamente l'efficenza con itemset grandi, invece di generare elementi candidati e testarli sull'intero database. La crescita inizia dal fondo della tabella di intestazione (nei rami più lunghi), trovando tutti i pattern che corrispondono alla condizione data. Viene creato un nuovo albero, con i conteggi proiettati dall'albero originale corrispondente all'insieme di pattern che sono condizionati da un attributo, con ogni nodo che contiene la somma dei conteggi dei nodi figli.
 - La crescita ricorsiva termina quando nessun pattern individuale (condizionato da un'attributo) soddisfa la soglia minima di supporto e l'elaborazione continua sugli elementi di intestazione rimanenti dell'albero FP originale.
 - Una volta completato il processo ricorsivo, sono stati trovati tutti gli insiemi di pattern di grandi dimensioni con copertura minima.
 
-L'implementazione dell'algoritmo *FP-Growth *utilizzato per la scoperta degli itemset frequenti nel nostro esperimento può essere scaricato [qui](http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php).
+L'implementazione dell'algoritmo *FP-Growth* utilizzato per la scoperta degli itemset frequenti nel nostro esperimento può essere scaricato [qui](http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php).
 
 Nella sezione che segue svolgeremo un'analisi esplorativa partendo dalle sequenze estratte.
 
@@ -192,7 +192,7 @@ Vediamo adesso quale operatore economico ha vinto più gare proposte da queste s
 
 Notiamo che le due distribuzioni sono piuttosto scarsamente correlate e che nel secondo grafico è presenta una barra relativa a "raggruppamento", che identifica le gare vinte da un raggruppamento in cui era presente almeno una delle aziende analizzate.
 
-Fra i vari metadati che abbiamo a disposizione ci sono anche gli attributi temporali legati al mese di aggiudicazione del bando. Nel grafico che segue confrontiamo il trend temporale dei bandi fra i due dataset *subset *e *other *con l'andamento di tutto il dataset generale, per vedere se ci sono discrepanze rilevanti:
+Fra i vari metadati che abbiamo a disposizione ci sono anche gli attributi temporali legati al mese di aggiudicazione del bando. Nel grafico che segue confrontiamo il trend temporale dei bandi fra i due dataset *subset* e *other* con l'andamento di tutto il dataset generale, per vedere se ci sono discrepanze rilevanti:
 
 <div style="text-align:center">
 <img src="./images/17.png" alt="Distribuzione Ammontare bandi" width="450px"/>
@@ -210,7 +210,7 @@ Nel primo grafico vediamo che c'è un particolare addensamento nella regione com
 
 Nel secondo grafico osserviamo invece che queste stesse aziende, quando non partecipano tutte insieme, prendono parte a gare con importi molto diversi. Vediamo che la maggior parte delle gare è concentrata nelle due fasce, fra *1.000€* e *40.000€* (circa *40%*) e fra *40.000€* e *1.000.000€* (circa 50%). Essendo questi operatori commerciali dei fornitori di idrocarburi, ci saremmo aspettati un giro di affari con un elevato tenore e d'altronde ci sono anche gare che superano *1 milione di €*.
 
-Osserviamo anche che la differenza fra gli *importi assegnati *e quelli effettivamente *liquidati* è estremamente bassa e risulta notevole solamente per i bandi con somme inferiori a *100€*, che spesso vengono liquidate direttamente in contanti.
+Osserviamo anche che la differenza fra gli *importi assegnati* e quelli effettivamente *liquidati* è estremamente bassa e risulta notevole solamente per i bandi con somme inferiori a *100€*, che spesso vengono liquidate direttamente in contanti.
 
 Come ultimo studio relativo all'analisi univariata andiamo a visualizzare la durata del bando in dettaglio usando un istogramma e in maniera aggregata tramite un boxplot:
 
@@ -220,38 +220,88 @@ Come ultimo studio relativo all'analisi univariata andiamo a visualizzare la dur
 
 La maggior parte dei bandi ha durata molto breve e diventa direttamente esecutiva. Ci sono alcuni bandi che sono ogni mese oppure ogni 3 mesi ma sono molto pochi. La differenza interessante fra i due grafici è il massimale che nel primo caso arriva a 6 mesi, mentre nel secondo copre diversi anni.
 
-Proseguiamo adesso la nostra analisi provando a studiare determinate coppie di feature per vedere se risultano correlate, ovvero svolgiamo un'analisi bivariata. Come per la sezione precedente le analisi verranno confrontate con il dataset *subset *e il dataset *other*.
+Proseguiamo adesso la nostra analisi provando a studiare determinate coppie di feature per vedere se risultano correlate, ovvero svolgendo un'analisi esplorativa bivariata. Come per la sezione precedente le analisi verranno confrontate con il dataset *subset* e il dataset *other*.
 
 ## Analisi Bivariata
+
+Lo scopo di questa sezione è indagare la correlazione di determinate coppie di variabili per tutti i bandi sotto analisi. In questo modo vengono identificati dei trend di proporzionalita fra i valori ed emergono più facilmente eventuali anomalie.
+
+Vediamo come si distribuiscono i bandi, indicati come cerchietti blu, in funzione della loro *durata* (in giorni) e dell'*importo liquidato* per il dataset *subset* (a sinistra) e *other* (a destra):
 
 <div style="text-align:center">
 <img src="./images/20.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
 
+Poiché molti bandi sono nello stesso punto e risultano sovrapposti abbiamo aggiunto, oltre alla griglia principale, anche i due istogrammi relativi alle due variabili dipendenti, che erano già stati presentati nella sezione precedente.
+
+Notiamo che a parte un bando con importo liquidato superiore ai *700.000*, gli altri punti seguono una distribuzione pressoché uniforme, e che la maggior parte dei bandi del dataset *other* non ha riceuto fondi.
+
+Vediamo adesso di correlati l'*importo di aggiudicazione* con la *durata* del bando, usando la stessa visualizzazione:
+
 <div style="text-align:center">
 <img src="./images/21.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
+
+Nel grafico di sinistra osserviamo che la maggior parte dei bandi ha una *durata immediata* e che le somme assegnate sono subito al di sotto della soglia dei *40.000€* (corrispondente all'esagono nero). Da questi grafici emerge un trend simile ai precedenti, con i bandi densamente aggregati nei dintorni dello zero per quanto riguarda la durata, il che non rende possibile evidenziare alcuna particolare correlazione fra le variabili.
+
+Vediamo adesso tramite una visualizzazione box-plot come si distribuiscono i bandi in funzione sia della *durata* sia della *pubblica amministrazione* che propone il bando:
 
 <div style="text-align:center">
 <img src="./images/22.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
 
+Per quanto riguarda il dataset *subset* le strutture proponenti sono soltanto *2* e mentre la *Start Romagna SPA* indice gare della durata prevalentemente di *1-2 mesi*, la *TPER SPA* ha un range più breve, con un massimale di *1 mese*.
+
+Il dataset *other* contiene molte più strutture, per cui nel grafico vengono selezionate soltanto le prime *25* (*top-25*). Vediamo che nella grande varietà, la maggior parte di pubbliche amministrazioni indice gare di una durata piuttosto consistente, che per tutte va da *0* fino a un massimale di *1 anno*. L'unica eccezione è rappresentata dalla *gestione dei trasporti e della navigazione dei laghi Maggiore, Garda e Como* che ha indetto bandi della durata di più di *3 anni*.
+
+Vediamo adesso come si correlano le *strutture proponenti* dei bandi con gli *importi aggiudicati*:
+
 <div style="text-align:center">
 <img src="./images/23.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
+
+Osserviamo che l'*importo di aggiudicazione* ha un'ordine di grandezza piuttosto definito per ogni struttura, come risulta particolarmente evidente nel dataset "subset", in cui si vedono chiaramente i box-plot dei due proponenti disgiunti.
+
+Per quanto riguarda il dataset *other*, ci sono alcuni bandi dall'importo particolarmente elevato, che causano una visualizzazione leggermente sconveniente, riducendo la dimensione dei box-plot.
+
+Di seguito visualizziamo la *tipologia di assegnazione* dei bandi e la loro durata:
 
 <div style="text-align:center">
 <img src="./images/24.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
 
+Nel primo grafico vediamo che la maggior parte dei bandi che hanno una *durata breve* (circa fino a un mese) sono stati assegnati tramite una *procedura ristretta*. I bandi che hanno una durata superiore invece risultano assegnati tramite una *procedura selettiva*.
+
+Il secondo grafico risulta ancora una volta un po' difficile da interpretare, ci sono diversi bandi fuori dai box-plot, che hanno una durata di più di *600* giorni e anche oltre i *1000*, e non emerge decisamente una tipologia dominante collegata alla durata.
+
+Proviamo a collegare invece la *tipologia di assegnazione* dei bandi con l'*importo di aggiudicazione*:
+
 <div style="text-align:center">
 <img src="./images/25.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
+
+Si osserva, nel primo grafico, che la maggior parte dei bandi inferiori al limite di affidamento diretta di *40.000€* è stato assegnato con una tipologia di *procedura negoziata*, mentre oltre questo limite troviamo, nella fascia immediatamente successiva una tipologia di *procedura selettiva*, che ha una varianza che arriva fino a *75.000€* e una tipologia di *procedura ristretta* che è magiormente distribuita, con una varianza che arriva a oltre *100.000€*, entrambe con un massimale di *130.000€*.
+
+Nel secondo grafico risalta decisamente la tipologia di *procedura ristretta* che è la tipologia con varianza più alta, arrivando a importi molto più grandi rispetto alle altre tipologie.
+
+Adesso invece visualizziamo il *vincitore della gara* e la *durata* del bando:
 
 <div style="text-align:center">
 <img src="./images/26.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
 
+La maggior parte dei bandi ha una *liquidazione immediata*, e la maggior parte degli operatori commerciali ha avuto assegnazone di durata prossima a *0*. Anche per le aziende che sono risultate aggiudicatarie di bandi con durata maggiore, questa sembra più essere un'eccezione che la norma, risulta essere piuttosto sporadica, come appare evidente dalla varianza dei box-plot che nel primo grafico si ferma a *60 giorni*.
+
+Come ultimo grafico della nostra analisi scegliamo di visualizzare i bandi secondo il *vincitore della gara* e l'*importo di aggiudicazione*:
+
 <div style="text-align:center">
 <img src="./images/27.png" alt="Distribuzione Ammontare bandi" width="800px"/>
 </div>
+
+Osserviamo in modo molto netto che per 3 aziende i box-plot partono da *40.000€*, mentre per tutte le altre arrivano massimo a questa cifra, per quanto riguarda il dataset *subset*.
+
+Sembra effettivamente esserci una interessante correlazione, che andrebbe la pena approfondire con delle analisi dettagliate su queste aziende per accertare eventuali irregolarità.
+
+## Conclusioni
+
+In questo studio abbiamo svolto un'analisi mirata sui competitor di determinati bandi di gara. Abbiamo mostrato in dettaglio come possiamo elaborare e visualizzare le feature disponibili, a partire da quelle più tradizionali, legate alle denominazione e agli importi dei capitali, per arrivare a quelle più complesse, come gli attributi geospaziali e i metadati temporali. Grazie ad un algoritmo di Machine Learning, *FP-Growth*, è stato possibile identificare alcuni operatori commerciali sospettati di agire in maniera concertata e abbiamo utilizzato due tipi di analisi, *univariata* e *bivariata*, sulle feature per accertare eventuali irregolarità. Abbiamo visto che una conoscenza della normativa vigente è un pre-requisito per un'analisi di questo tipo, così come una buona consistenza del dataset, per non rendere vani i conteggi delle statistiche o visualizzare male i grafici. Questo tipo di analisi, pur essendo esplorativo e generale, risulta già essere un primo livello di approfondimento e si pone come utile strumento investigativo, da usare per coadiuvare le indagini tradizionali da parte degli organi di controllo. 
