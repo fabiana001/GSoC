@@ -16,7 +16,7 @@ It provides the following datastories:
 Every datastory is placed inside a single folder and has its own image folder that holds the visualizations and the graphs.
 
 ## Self-Evaluation
-###What has been done and what not?
+### What has been done and what not?
 
 * **ANAC** is the anti-corruption institution of the italian government and I have completed 2 datastories that tells the analysis of their [OpenData datasets](https://dati.anticorruzione.it/) and how it can help fight irregularities in the tenders. To fully appreciate this work one needs to know some basic python programming and possibly some machine learning, since they are both heavily used in the processing. 
 
