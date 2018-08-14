@@ -18,7 +18,7 @@ Every datastory is placed inside a single folder and has its own image folder th
 ## Self-Evaluation
 ### What has been done and what not?
 
-* **ANAC** is the anti-corruption institution of the italian government and I have completed 2 datastories that tells the analysis of their [OpenData datasets](https://dati.anticorruzione.it/) and how it can help fight irregularities in the tenders. To fully appreciate this work one needs to know some basic python programming and possibly some machine learning, since they are both heavily used in the processing. 
+* **ANAC** is the anti-corruption institution of the italian government and I have completed 2 datastories that tell the analysis of their [OpenData datasets](https://dati.anticorruzione.it/) and how it can help fight irregularities in the tenders. To fully appreciate this work one needs to know some basic python programming and possibly some machine learning, since they are both heavily used in the processing. 
 
 * **DSU** is the agency of the italian ministry of education that implements the "right-to-study" on a regional basis. I have analyzed student residences, cafeterias, expenses, interventions and employees over different years, and presented this work using interactive visualizations and providing insights.
 
