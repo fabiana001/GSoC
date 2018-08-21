@@ -210,7 +210,7 @@ Nel primo grafico vediamo che c'è un particolare addensamento nella regione com
 
 Nel secondo grafico osserviamo invece che queste stesse aziende, quando non partecipano tutte insieme, prendono parte a gare con importi molto diversi. Vediamo che la maggior parte delle gare è concentrata nelle due fasce, fra *1.000€* e *40.000€* (circa *40%*) e fra *40.000€* e *1.000.000€* (circa 50%). Essendo questi operatori commerciali dei fornitori di idrocarburi, ci saremmo aspettati un giro di affari con un elevato tenore e d'altronde ci sono anche gare che superano *1 milione di €*.
 
-Osserviamo anche che la differenza fra gli *importi assegnati* e quelli effettivamente *liquidati* è estremamente bassa e risulta notevole solamente per i bandi con somme inferiori a *100€*, che spesso vengono liquidate direttamente in contanti.
+Osserviamo anche che la differenza fra gli *importi assegnati* e quelli effettivamente *liquidati* è estremamente bassa e risulta notevole solamente per i bandi con somme inferiori a *100€*, che spesso vengono liquidate direttamente in contanti. Inoltre c'è un forte scarto fra le cifre di *ammontare* e gli importi *liquidati*, che verrà chiarito meglio nell'analisi bivariata.
 
 Come ultimo studio relativo all'analisi univariata andiamo a visualizzare la durata del bando in dettaglio usando un istogramma e in maniera aggregata tramite un boxplot:
 
